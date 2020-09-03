@@ -1259,52 +1259,6 @@
                    (translate [0 0 -20] (cube 350 350 40)) 
                   ))
 
-(spit "export/right.scad"
-      (write-scad model-right))
- 
-(spit "export/left.scad"
-      (write-scad (mirror [-1 0 0] model-right)))
-	  
-
-                  
-(spit "export/right-test.scad"
-   (write-scad
-		(difference
-                   (union
-                    key-holes
-                    connectors
-                    thumb
-                    thumb-connectors
-					 rj9-holder
-                    (difference 
-						(union case-walls 
-							(if (==  bottom-cover 1) screw-insert-outers)
-						;	(->> usb-holder(translate[20 0 0]))
-							     
-							   teensy-holder
-                         ;;   original_usb_holder
-			;				usb-holder
-			;				trrs-holder
-			
-						   )
-                                 rj9-space 
-                            original_usb_holder_hole
-						(if (== wrist-rest-on 1) (->> rest-case-cuts	(translate [(+ (first thumborigin ) 33) (- (second thumborigin) 50) 0])))  
-                          ;(->> usb-holder-hole(translate[20 0 0]))
-			;			  trrs-holder-hole
-                             ; screw-insert-holes
-							  )
-             
-              ;    //  wire-posts
-                    ; thumbcaps
-                    ; caps
-                    )
-                   ;(translate [0 0 -20] (cube 350 350 40)
-			(translate [0 0 -20] (cube 350 350 40))
-		) 
-  )
-)
-
 (def model-plate-right
 	(union
 	;	(translate [0 0 -3.4] plate-screw-recess)
@@ -1335,54 +1289,47 @@
 	)
                   
 )		  
-			
-			
-(spit "export/sample.scad"
-      (write-scad 
-		(union
-			model-right
-			caps
-			thumbcaps
-			;(if (== bottom-cover 1) (->> model-plate-right))
-			(if (== wrist-rest-on 1) (->> wrist-rest-build 		)		)
-			
-		))
-)		
-	  
 
+(def model-preview
+    (union
+        model-right
+        caps
+        thumbcaps
+        ;(if (== bottom-cover 1) (->> model-plate-right))
+        (if (== wrist-rest-on 1) (->> wrist-rest-build))
+    )
+)
 
-	  
-(spit "export/right-plate.scad"
+(spit "export/case-right.scad"
+      (write-scad model-right))
+
+(spit "export/case-left.scad"
+      (write-scad (mirror [-1 0 0] model-right)))
+
+(spit "export/plate-right.scad"
       (write-scad model-plate-right))
 
-	  
-(spit "export/wrist-rest.scad"
-      (write-scad wrist-rest-build))	  
-	  
-	
-	  
-	  
-	  
-(spit "export/test.scad"
+(spit "export/plate-left.scad"
+      (write-scad (mirror [-1 0 0] model-plate-right)))
+
+(spit "export/wrist-rest-right.scad"
+      (write-scad wrist-rest-build))
+
+(spit "export/wrist-rest-left.scad"
+      (write-scad (mirror [-1 0 0] wrist-rest-build)))
+
+(spit "export/preview.scad"
+      (write-scad model-preview))
+
+(spit "export/preview-full.scad"
       (write-scad
-		(union
-		#_	(difference
-					(union
-						;(if (== wrist-rest-on 1) (->> wrist-rest-build 		)		);;add/remove the wrist rest holes
-						case-walls
-						screw-insert-outers	
-					)
-						;screw-insert-outers 
-					;	screw-insert-outers
-						(translate [0 0 -5] screw-insert-screw-holes)
-						cut-bottom
-						
-				)
-			case-wall-cutout
-			)
-	  ))
-      ;   (difference usb-holder usb-holder-hole)))
-
-
+        (union
+          (translate [100,0,0] model-preview)
+          (translate [-100,0,0]
+            (mirror [-1 0 0] model-preview)
+          )
+        )
+      )
+)
 
 (defn -main [dum] 1)  ; dummy to make it easier to batch
