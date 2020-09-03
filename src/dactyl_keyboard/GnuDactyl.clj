@@ -1259,15 +1259,15 @@
                    (translate [0 0 -20] (cube 350 350 40)) 
                   ))
 
-(spit "things/right.scad"
+(spit "export/right.scad"
       (write-scad model-right))
  
-(spit "things/left.scad"
+(spit "export/left.scad"
       (write-scad (mirror [-1 0 0] model-right)))
 	  
 
                   
-(spit "things/right-test.scad"
+(spit "export/right-test.scad"
    (write-scad
 		(difference
                    (union
@@ -1337,7 +1337,7 @@
 )		  
 			
 			
-(spit "things/sample.scad"
+(spit "export/sample.scad"
       (write-scad 
 		(union
 			model-right
@@ -1352,18 +1352,18 @@
 
 
 	  
-(spit "things/right-plate.scad"
+(spit "export/right-plate.scad"
       (write-scad model-plate-right))
 
 	  
-(spit "things/wrist-rest.scad"
+(spit "export/wrist-rest.scad"
       (write-scad wrist-rest-build))	  
 	  
 	
 	  
 	  
 	  
-(spit "things/test.scad"
+(spit "export/test.scad"
       (write-scad
 		(union
 		#_	(difference
