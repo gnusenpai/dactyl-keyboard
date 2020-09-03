@@ -15,6 +15,9 @@
 ;; Shape parameters ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+(def nrows 5)
+(def ncols 6)
+
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ;;;;;;;;;Wrist rest;;;;;;;;;;		
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -44,9 +47,6 @@
 ;@@@@@@@@@@-@@@@@@@@@@@@@@@@
 ;;;0= box 1=cherry 2= Alps
 (def switch-type 0)
-
-(def nrows 5)
-(def ncols 6)
 
 
 										;;dfefault 1
